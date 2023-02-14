@@ -5,13 +5,11 @@
 -- Default Schema 확인
 show search_path;
 
--------------------------------------------------------------
-
 -- Default Schema 설정
 -- alter role (1st place)
 alter role [USER_NM] set search_path to [SCHEMA_1_NM], [SCHEMA_2_NM], ...;  -- 1부터 1st place
-alter role ilifo set search_path to ilifocnt, "$user", public;
-> ilifocnt, ilifo, public;
+alter role postgres set search_path to schema1, "$user", public;
+> schema1, postgres, public;
 
 -- alter database (2nd place)
 alter database [DB_NM] SET search_path TO [SCHEMA_1_NM], [SCHEMA_2_NM], ...; -- 1부터 1st place
@@ -35,9 +33,32 @@ searche_path = [SCHEMA_1_NM], [SCHEMA_2_NM], ...;
 -- Default Schema 초기화
 -- alter role (1st place)
 alter role [USER_NM] set search_path to default;
-alter role ilifo set search_path to default;
-
 alter role [USER_NM] reset search_path;
+
+alter role postgres set search_path to default;
 
 -- alter database (2nd place)
 alter database [DB_NM] reset search_path;
+
+
+
+========================shell
+##############################################################
+# PostgreSQL | Default Schema 변경
+##############################################################
+# Default Schema 확인
+show search_path;
+
+
+# Default Schema 변경
+alter role [USER_NM] set search_path to [SCHEMA_1_NM], [SCHEMA_2_NM], ...;  # 1부터 1st place
+alter role ilifo set search_path to ilifocnt, public;
+set show search_path to [USER_1_NM], [USER_2_NM], ...;
+
+
+# Default Schema 초기화
+alter role [USER_NM] set search_path to default;
+alter role ilifo set search_path to default;
+
+
+

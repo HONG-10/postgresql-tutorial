@@ -6,20 +6,34 @@
 create user [USER_NM] password ['PASSWORD'];
 create user postgres password '1234';
 
+
 -- DB 생성
 create database [DB_NM];
 create database [DB_NM] owner [USER_NM];
 create database postgres owner postgres;
 
+
 -- SCHEMA 생성
 create schema [SCHEMA_NM];
 create schema public;
 
+-- TABLE 생성
+create table [TABLE_NM] (
+	[SEQ_INCLUDE_COLUMN_NM] int not null default nextval('[SEQUENCE_NM]'), -- Table Include Sequence
+	[COLUMN_NM] VARCHAR(30),
+	...
+);
 
+-- SEQUENCE 생성
+create sequence [SEQUENCE_NM];
+create sequence if not exists [SEQUENCE_NM] start 1;
 
-
-
-
+-- Table Include Sequence | Tabel 생성 시 SEQUENCE 생성
+create table [TABLE_NM](
+	시퀀스연결컬럼명 int not null default nextval('[SEQUENCE_NM]'),
+	컬럼명 VARCHAR(30),
+	컬럼명 VARCHAR(200)
+);
 
 
 
